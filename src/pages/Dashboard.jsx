@@ -1,8 +1,21 @@
+import ProfileCard from "../components/ProfileCard";
+import WeatherWidget from "../components/WeatherWidget";
+import NewsWidget from "../components/NewsWidget";
+import "./Dashboard.css";
+
 const Dashboard = () => {
   return (
-    <main>
-      <h1>Dashboard</h1>
-      <p>Phase 3 — Coming soon.</p>
+    <main className="dashboard">
+      {/* ── Left column: Profile + Weather ─────────────────────── */}
+      <div className="dashboard__left">
+        <ProfileCard />
+        <WeatherWidget />
+      </div>
+
+      {/* ── Right column: News ─────────────────────────────────── */}
+      <div className="dashboard__right">
+        <NewsWidget />
+      </div>
     </main>
   );
 };

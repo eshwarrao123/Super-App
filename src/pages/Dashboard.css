@@ -1,0 +1,497 @@
+/* ==========================================================================
+   Dashboard.css  —  Matches Figma Page 3
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   Page shell
+   -------------------------------------------------------------------------- */
+.dashboard {
+  display: flex;
+  gap: 32px;
+  align-items: stretch; /* Both columns same height */
+  min-height: 100vh;
+  min-height: 100dvh;
+  padding: 48px 44px;
+  background-color: #0d0d0d;
+  box-sizing: border-box;
+}
+
+/* --------------------------------------------------------------------------
+   Column layout — Figma: left ≈55%, right ≈40%
+   -------------------------------------------------------------------------- */
+.dashboard__left {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  flex: 0 0 520px;     /* Fixed left column, matches Figma */
+  max-width: 520px;
+}
+
+.dashboard__right {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ==========================================================================
+   PROFILE CARD
+   ========================================================================== */
+.profile-card {
+  display: flex;
+  gap: 28px;
+  align-items: center;
+  background: linear-gradient(140deg, #5533cc 0%, #7b3fe4 55%, #4a28a8 100%);
+  border-radius: 24px;
+  padding: 24px 28px 24px 20px;
+  box-shadow: 0 8px 32px rgba(78, 43, 204, 0.35);
+}
+
+/* ---------- Avatar ---------- */
+.profile-card__avatar-col {
+  flex-shrink: 0;
+}
+
+.profile-card__avatar-wrap {
+  width: 110px;
+  height: 155px;
+  border-radius: 55px;
+  overflow: hidden;
+  background: linear-gradient(180deg, #5a3ac9 0%, #2a1262 100%);
+  border: 3px solid rgba(255, 255, 255, 0.2);
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.profile-card__avatar {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+}
+
+/* ---------- Info ---------- */
+.profile-card__info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex: 1;
+}
+
+.profile-card__name {
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.92);
+  margin: 0;
+  line-height: 1.4;
+}
+
+.profile-card__email {
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.8);
+  margin: 0 0 4px;
+  line-height: 1.4;
+}
+
+.profile-card__username {
+  font-size: 2rem;
+  font-weight: 800;
+  color: #ffffff;
+  margin: 0 0 16px;
+  letter-spacing: 0.5px;
+  line-height: 1.1;
+}
+
+/* ---------- Category chips ---------- */
+.profile-card__chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.profile-card__chip {
+  padding: 9px 22px;
+  background: rgba(255, 255, 255, 0.14);
+  border: 1.5px solid rgba(255, 255, 255, 0.25);
+  border-radius: 30px;
+  color: #ffffff;
+  font-size: 0.9rem;
+  font-weight: 500;
+  letter-spacing: 0.2px;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+
+/* ==========================================================================
+   WEATHER WIDGET
+   ========================================================================== */
+.weather-widget {
+  border-radius: 20px;
+  overflow: hidden;
+  background-color: #161625;
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
+}
+
+/* ---------- Pink date/time bar ---------- */
+.weather-widget__bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px 30px;
+  background: linear-gradient(90deg, #e91e8c 0%, #ff4081 100%);
+}
+
+.weather-widget__date,
+.weather-widget__time {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: 0.5px;
+}
+
+/* ---------- Stats body ---------- */
+.weather-widget__body {
+  display: flex;
+  align-items: center;
+  padding: 22px 16px;
+  min-height: 100px;
+}
+
+.weather-widget__status {
+  color: #aaaaaa;
+  font-size: 0.9rem;
+  padding: 8px;
+  margin: 0;
+  width: 100%;
+  text-align: center;
+}
+
+.weather-widget__status--error {
+  color: #ff6b6b;
+}
+
+/* --- Three columns --- */
+.weather-widget__icon-col,
+.weather-widget__temp-col,
+.weather-widget__extra-col {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+/* Vertical dividers */
+.weather-widget__divider {
+  width: 1px;
+  height: 64px;
+  background: rgba(255, 255, 255, 0.12);
+  flex-shrink: 0;
+  margin: 0 4px;
+}
+
+/* OWM icon image */
+.weather-widget__icon-img {
+  width: 64px;
+  height: 64px;
+  object-fit: contain;
+  filter: drop-shadow(0 0 8px rgba(108, 159, 255, 0.5));
+}
+
+/* Fallback emoji icon */
+.weather-widget__icon {
+  font-size: 3rem;
+  line-height: 1;
+}
+
+.weather-widget__condition {
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.55);
+  text-align: center;
+  text-transform: capitalize;
+  max-width: 90px;
+}
+
+/* Temperature */
+.weather-widget__temp {
+  font-size: 2.75rem;
+  font-weight: 700;
+  color: #ffffff;
+  line-height: 1;
+}
+
+/* Stat rows */
+.weather-widget__stat {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: rgba(255, 255, 255, 0.88);
+  font-size: 0.875rem;
+}
+
+.weather-widget__stat-icon {
+  font-size: 1.25rem;
+  flex-shrink: 0;
+}
+
+.weather-widget__stat-value {
+  display: block;
+  font-weight: 600;
+  font-size: 0.925rem;
+  color: #ffffff;
+  line-height: 1.2;
+}
+
+.weather-widget__stat small {
+  font-size: 0.72rem;
+  color: rgba(255, 255, 255, 0.45);
+  display: block;
+  line-height: 1.4;
+}
+
+/* ==========================================================================
+   NEWS WIDGET
+   ========================================================================== */
+.news-widget {
+  background: #ffffff;
+  border-radius: 20px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  height: 100%;           /* Fills the entire right column height */
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  outline: none;          /* Remove focus ring — keyboard nav handled internally */
+}
+
+/* ── Carousel viewport — clips the sliding panels ── */
+.news-widget__viewport {
+  flex: 1;
+  position: relative;
+  overflow: hidden;        /* The actual clip boundary */
+  min-height: 0;
+}
+
+/* ── Each full-height slide sits inside the viewport ── */
+.news-widget__slide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  will-change: transform, opacity;
+}
+
+/* ── Slide entering from the right (NEXT direction) ── */
+.news-widget__slide--enter-next {
+  animation: slide-in-right 0.45s cubic-bezier(0.4, 0, 0.2, 1) both;
+}
+
+/* ── Slide exiting to the left (NEXT direction) ── */
+.news-widget__slide--exit-next {
+  animation: slide-out-left 0.45s cubic-bezier(0.4, 0, 0.2, 1) both;
+}
+
+/* ── Slide entering from the left (PREV direction) ── */
+.news-widget__slide--enter-prev {
+  animation: slide-in-left 0.45s cubic-bezier(0.4, 0, 0.2, 1) both;
+}
+
+/* ── Slide exiting to the right (PREV direction) ── */
+.news-widget__slide--exit-prev {
+  animation: slide-out-right 0.45s cubic-bezier(0.4, 0, 0.2, 1) both;
+}
+
+@keyframes slide-in-right {
+  from { transform: translateX(100%); opacity: 0.6; }
+  to   { transform: translateX(0);    opacity: 1;   }
+}
+
+@keyframes slide-out-left {
+  from { transform: translateX(0);     opacity: 1;   }
+  to   { transform: translateX(-100%); opacity: 0.6; }
+}
+
+@keyframes slide-in-left {
+  from { transform: translateX(-100%); opacity: 0.6; }
+  to   { transform: translateX(0);     opacity: 1;   }
+}
+
+@keyframes slide-out-right {
+  from { transform: translateX(0);    opacity: 1;   }
+  to   { transform: translateX(100%); opacity: 0.6; }
+}
+
+.news-widget--loading,
+.news-widget--error,
+.news-widget--empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 40px;
+  background: #1e1e2e;
+  border-radius: 20px;
+  color: #aaaaaa;
+  height: 100%;
+  box-sizing: border-box;
+}
+
+/* ---------- Image — taller to match Figma ---------- */
+.news-widget__img-wrap {
+  width: 100%;
+  height: 260px;        /* Taller image like Figma */
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.news-widget__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* ---------- Text body ---------- */
+.news-widget__body {
+  padding: 20px 22px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex: 1;
+}
+
+.news-widget__title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #111111;
+  margin: 0;
+  line-height: 1.35;
+}
+
+.news-widget__date {
+  font-size: 0.78rem;
+  color: #777777;
+  margin: 0;
+  font-weight: 500;
+  letter-spacing: 0.2px;
+}
+
+.news-widget__desc {
+  font-size: 0.875rem;
+  color: #444444;
+  line-height: 1.65;
+  margin: 0;
+  flex: 1;
+
+  /* Clamp to ~6 lines */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 6;
+  overflow: hidden;
+  text-align: justify;
+}
+
+/* ---------- Progress dots (outside viewport clip) ---------- */
+.news-widget__dots {
+  display: flex;
+  gap: 7px;
+  padding: 12px 22px 14px;
+  flex-shrink: 0;
+  background: #ffffff;    /* Stays on the white card surface */
+}
+
+.news-widget__dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  border: none;
+  background: #d0d0d0;
+  cursor: pointer;
+  padding: 0;
+  transition: background 0.25s ease, transform 0.2s ease;
+}
+
+.news-widget__dot--active {
+  background: #5533cc;
+  transform: scale(1.4);
+}
+
+/* ==========================================================================
+   Responsive
+   ========================================================================== */
+@media (max-width: 1024px) {
+  .dashboard__left {
+    flex: 0 0 420px;
+    max-width: 420px;
+  }
+}
+
+@media (max-width: 900px) {
+  .dashboard {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 24px;
+    gap: 20px;
+  }
+
+  .dashboard__left {
+    flex: none;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .dashboard__right {
+    width: 100%;
+    min-height: 480px;
+  }
+
+  .news-widget {
+    height: auto;
+  }
+
+  .news-widget--loading,
+  .news-widget--error,
+  .news-widget--empty {
+    height: auto;
+  }
+}
+
+@media (max-width: 600px) {
+  .dashboard {
+    padding: 16px;
+    gap: 16px;
+  }
+
+  .profile-card {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 20px;
+    gap: 16px;
+  }
+
+  .profile-card__avatar-wrap {
+    width: 90px;
+    height: 120px;
+  }
+
+  .profile-card__username {
+    font-size: 1.5rem;
+  }
+
+  .weather-widget__date,
+  .weather-widget__time {
+    font-size: 1.15rem;
+  }
+
+  .weather-widget__temp {
+    font-size: 2rem;
+  }
+
+  .news-widget__img-wrap {
+    height: 200px;
+  }
+}

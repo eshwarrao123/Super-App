@@ -1,109 +1,111 @@
 /* ==========================================================================
    Categories.css
-   Dark split-layout matching the Figma category selection screen.
+   Refined to match Figma category selection screen.
    ========================================================================== */
 
 /* --------------------------------------------------------------------------
-   Page shell — full viewport, no scroll on desktop
+   Page shell — exact viewport fit, no page scroll on desktop
    -------------------------------------------------------------------------- */
 .cat-page {
   display: flex;
-  height: 100%;
-  background-color: #0d0d0d;
+  height: 100vh;
+  height: 100dvh;
+  background-color: #000000;
   overflow: hidden;
+  /* Prevents body scrolling */
 }
 
 /* --------------------------------------------------------------------------
    Left panel
    -------------------------------------------------------------------------- */
 .cat-page__left {
-  flex: 0 0 300px;
+  position: relative;
+  flex: 0 0 clamp(240px, 30vw, 320px);
+  /* Fluid width to survive 200% zoom */
   display: flex;
   flex-direction: column;
-  padding: 40px 32px;
-  background-color: #0d0d0d;
-  overflow-y: auto;
+  padding: clamp(24px, 5vh, 50px) clamp(20px, 4vw, 40px);
+  background-color: #000000;
+  z-index: 0;
+  /* Removed overflow-y: auto to strictly prevent scrolling */
 }
 
-/* Logo */
+.cat-page__left::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 400px;
+  background: radial-gradient(circle, rgba(28, 158, 18, 0.15) 0%, transparent 60%);
+  pointer-events: none;
+  z-index: -1;
+}
+
 .cat-page__logo {
   font-family: "Single Day", cursive, system-ui;
-  font-size: 1.75rem;
+  font-size: clamp(1.75rem, 4vh, 2.5rem);
+  font-weight: 400;
   color: #65d000;
-  margin: 0 0 28px;
+  margin: 0 0 clamp(20px, 4vh, 40px);
   line-height: 1;
 }
 
-/* Heading */
 .cat-page__heading {
-  font-size: 2.125rem;
+  font-size: clamp(2rem, 5vh, 3rem);
   font-weight: 700;
   color: #ffffff;
   line-height: 1.2;
-  margin: 0 0 28px;
+  margin: 0 0 clamp(20px, 4vh, 40px);
 }
 
 /* ---------- Selected chips ---------- */
 .cat-page__chips {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
-  margin-bottom: 16px;
-  min-height: 36px;
+  gap: clamp(8px, 1.5vh, 12px);
+  margin-bottom: clamp(16px, 3vh, 24px);
 }
 
 .cat-chip {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  padding: 5px 10px 5px 12px;
-  background-color: #1a3a0a;
-  border: 1px solid #65d000;
-  border-radius: 20px;
-  color: #e5e7eb;
-  font-size: 0.8125rem;
-  line-height: 1;
+  gap: 8px;
+  padding: clamp(6px, 1vh, 8px) clamp(12px, 2vw, 16px);
+  background-color: #188910;
+  border: none;
+  border-radius: 30px;
+  color: #ffffff;
+  font-size: clamp(0.85rem, 1.5vh, 1rem);
 }
 
 .cat-chip__remove {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 16px;
-  height: 16px;
   background: none;
   border: none;
-  color: #e5e7eb;
-  font-size: 1rem;
+  color: #0b4006;
+  font-size: 1.2rem;
   line-height: 1;
   cursor: pointer;
   padding: 0;
-  border-radius: 50%;
-  transition: color 0.15s ease, background-color 0.15s ease;
 }
 
 .cat-chip__remove:hover {
-  color: #ef4444;
-  background-color: rgba(239, 68, 68, 0.15);
+  color: #000000;
 }
 
-/* ---------- Validation messages ---------- */
+/* ---------- Validation ---------- */
 .cat-page__validation {
   display: flex;
   align-items: center;
-  gap: 6px;
-  color: #ef4444;
-  font-size: 0.8125rem;
+  gap: 8px;
+  color: #ff0000;
+  font-size: clamp(0.85rem, 1.5vh, 1rem);
   margin: 0;
 }
 
-.cat-page__validation-icon {
-  font-size: 0.875rem;
-}
-
 .cat-page__hint {
-  color: #6b7280;
-  font-size: 0.8125rem;
+  color: #4b5563;
+  font-size: clamp(0.85rem, 1.5vh, 1rem);
   margin: 0;
 }
 
@@ -114,116 +116,96 @@
   flex: 1;
   display: flex;
   flex-direction: column;
-  padding: 32px 28px 24px;
-  overflow-y: auto;
-  background-color: #0d0d0d;
+  padding: clamp(20px, 4vh, 40px) clamp(20px, 5vw, 60px);
+  background-color: #000000;
+  min-height: 0;
+  /* Critical: allows the panel to shrink to fit viewport */
 }
 
-/* ---------- Category grid — 3 columns ---------- */
+/* ---------- Category grid ---------- */
 .cat-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 14px;
+  /* Exactly 3 columns */
+  grid-template-rows: repeat(3, 1fr);
+  /* Exactly 3 equal rows */
+  gap: clamp(10px, 2.5vh, 20px);
+  
+  width: 100%;
+  max-width: 850px; /* Allows the grid to be much wider, matching Figma */
+  
   flex: 1;
+  /* Takes available space after the footer */
+  min-height: 0;
+  max-height: 900px; /* Allows the grid to be much taller, maintaining vertical card proportions */
+  
+  margin: auto; /* Vertically and horizontally centers the grid */
 }
 
 /* --------------------------------------------------------------------------
-   CategoryCard component
+   CategoryCard
    -------------------------------------------------------------------------- */
 .cat-card {
   position: relative;
   display: flex;
   flex-direction: column;
+  height: 100%;
+  /* Fill exactly one grid cell */
   border-radius: 12px;
-  overflow: hidden;
   cursor: pointer;
-  border: 3px solid transparent;
-  transition:
-    transform 0.18s ease,
-    border-color 0.18s ease,
-    box-shadow 0.18s ease;
+  border: 4px solid transparent;
+  transition: transform 0.2s ease, border-color 0.2s ease;
   outline: none;
   user-select: none;
-  /* min-height keeps all cards uniform regardless of image aspect ratio */
-  min-height: 140px;
 }
 
 .cat-card:hover {
-  transform: translateY(-4px) scale(1.02);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+  transform: translateY(-2px) scale(1.02);
 }
 
 .cat-card:active {
-  transform: scale(0.97);
+  transform: scale(0.98);
 }
 
-/* Focus ring for keyboard navigation */
-.cat-card:focus-visible {
-  box-shadow: 0 0 0 3px #65d000;
-}
-
-/* Selected state */
 .cat-card--selected {
-  border-color: #65d000;
-  box-shadow: 0 0 0 1px #65d000, 0 6px 20px rgba(101, 208, 0, 0.2);
+  border-color: #188910;
 }
 
-/* Checkmark badge (top-right corner) */
 .cat-card__check {
-  position: absolute;
-  top: 8px;
-  right: 8px;
-  width: 22px;
-  height: 22px;
-  background-color: #65d000;
-  color: #0a0a0a;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 0.75rem;
-  font-weight: 700;
-  z-index: 2;
-  /* Animate in when selected */
-  animation: check-pop 0.18s ease forwards;
+  display: none;
 }
 
-@keyframes check-pop {
-  from { transform: scale(0); opacity: 0; }
-  to   { transform: scale(1); opacity: 1; }
-}
-
-/* Label — sits above the image */
 .cat-card__label {
-  position: relative;
-  z-index: 1;
-  padding: 10px 12px 6px;
-  font-size: 0.9375rem;
-  font-weight: 600;
+  padding: clamp(10px, 2vh, 16px) clamp(10px, 2vh, 16px) clamp(8px, 1.5vh, 12px);
+  font-size: clamp(1rem, 2vh, 1.25rem);
+  font-weight: 500;
   color: #ffffff;
-  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
   line-height: 1;
+  flex-shrink: 0;
+  /* Label height is fixed */
 }
 
-/* Image wrapper — fills remaining space */
 .cat-card__img-wrap {
+  position: relative; /* Added to contain the absolute image */
   flex: 1;
+  /* Takes all remaining vertical space inside the card */
+  min-height: 0;
+  /* Critical: allows image container to shrink if viewport is short */
+  margin: 0 clamp(8px, 1.5vh, 12px) clamp(8px, 1.5vh, 12px);
+  border-radius: 8px;
   overflow: hidden;
-  border-radius: 0 0 10px 10px;
-  margin: 0 8px 8px;
 }
 
 .cat-card__img {
+  position: absolute; /* CRUCIAL: Removes intrinsic image size from layout calculation */
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
+  /* Exact fit inside wrapper */
   object-fit: cover;
+  /* Prevents distortion, crops gracefully if needed */
   display: block;
-  border-radius: 8px;
-  transition: transform 0.25s ease;
-}
-
-.cat-card:hover .cat-card__img {
-  transform: scale(1.05);
 }
 
 /* --------------------------------------------------------------------------
@@ -232,91 +214,76 @@
 .cat-page__footer {
   display: flex;
   justify-content: flex-end;
-  padding-top: 16px;
+  padding-top: clamp(16px, 3vh, 24px);
+  flex-shrink: 0;
+  margin-top: auto; /* Guarantees the button is forced to the bottom */
+  /* Button container must never shrink, always visible */
 }
 
 .cat-page__continue {
-  padding: 12px 28px;
-  background-color: #65d000;
+  padding: clamp(10px, 2vh, 12px) clamp(24px, 4vw, 32px);
+  background-color: #188910;
   border: none;
-  border-radius: 24px;
-  color: #0a0a0a;
-  font-size: 0.9375rem;
-  font-weight: 700;
+  border-radius: 30px;
+  color: #ffffff;
+  font-size: clamp(0.9rem, 2vh, 1rem);
+  font-weight: 500;
   cursor: pointer;
-  transition:
-    background-color 0.18s ease,
-    box-shadow 0.18s ease,
-    transform 0.1s ease;
+  transition: background-color 0.2s ease, transform 0.1s ease;
 }
 
 .cat-page__continue:hover:not(:disabled) {
-  background-color: #74e600;
-  box-shadow: 0 4px 18px rgba(101, 208, 0, 0.35);
-}
-
-.cat-page__continue:active:not(:disabled) {
-  transform: scale(0.97);
+  background-color: #1c9e12;
 }
 
 .cat-page__continue--disabled {
-  background-color: #2a2a2a;
-  color: #555;
+  background-color: #333333;
+  color: #888888;
   cursor: not-allowed;
 }
 
 /* ==========================================================================
    Responsive
    ========================================================================== */
-
-/* Tablet — reduce left panel, keep 3-col grid */
 @media (max-width: 900px) {
   .cat-page__left {
-    flex: 0 0 240px;
-    padding: 32px 20px;
-  }
-
-  .cat-page__heading {
-    font-size: 1.625rem;
-  }
-
-  .cat-grid {
-    gap: 10px;
-  }
-}
-
-/* Mobile — stack vertically, 2-col grid */
-@media (max-width: 600px) {
-  html, body, #root {
-    height: auto;
-    overflow: auto;
-  }
-
-  .cat-page {
-    flex-direction: column;
-    height: auto;
-    min-height: 100dvh;
-    overflow: visible;
-  }
-
-  .cat-page__left {
-    flex: none;
-    width: 100%;
-    padding: 24px 20px 16px;
-    overflow: visible;
+    flex: 0 0 clamp(220px, 35vw, 280px);
+    padding: clamp(24px, 4vh, 40px) 30px;
   }
 
   .cat-page__right {
+    padding: clamp(24px, 4vh, 40px) 30px;
+  }
+}
+
+@media (max-width: 768px) {
+  .cat-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .cat-page {
+    flex-direction: column;
+    height: auto;
+    overflow: auto;
+    /* Enable scrolling ONLY on mobile */
+  }
+
+  .cat-page__left,
+  .cat-page__right {
     flex: none;
-    overflow: visible;
-    padding: 16px 20px 32px;
+    width: 100%;
   }
 
   .cat-grid {
     grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: auto;
+    /* Revert to natural rows on mobile */
   }
 
   .cat-card {
-    min-height: 120px;
+    height: clamp(140px, 25vh, 180px);
+    /* Fluid height for mobile cards */
   }
 }
