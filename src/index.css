@@ -1,6 +1,5 @@
 /* ==========================================================================
    Global Reset & Base Styles
-   Phase 2+ will add design tokens and component styles below this block.
    ========================================================================== */
 
 *,
@@ -19,19 +18,26 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+html,
 body {
-  min-height: 100vh;
-  background-color: #f5f5f5;
-  color: #1a1a1a;
+  /* Lock the document itself to the viewport — no page-level scroll */
+  height: 100%;
+  overflow: hidden;
+  background-color: #0d0d0d;
+  color: #e5e7eb;
 }
 
 #root {
-  min-height: 100vh;
+  /* Root fills the full viewport exactly, no more, no less */
+  height: 100%;
+  overflow: hidden;
 }
 
+/* img reset — intentionally NOT setting max-width:100% globally
+   because the illustration needs height:100% to work correctly.
+   Individual images that need responsive behaviour get their own rule. */
 img {
   display: block;
-  max-width: 100%;
 }
 
 button {

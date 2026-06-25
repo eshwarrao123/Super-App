@@ -1,0 +1,322 @@
+/* ==========================================================================
+   Categories.css
+   Dark split-layout matching the Figma category selection screen.
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   Page shell — full viewport, no scroll on desktop
+   -------------------------------------------------------------------------- */
+.cat-page {
+  display: flex;
+  height: 100%;
+  background-color: #0d0d0d;
+  overflow: hidden;
+}
+
+/* --------------------------------------------------------------------------
+   Left panel
+   -------------------------------------------------------------------------- */
+.cat-page__left {
+  flex: 0 0 300px;
+  display: flex;
+  flex-direction: column;
+  padding: 40px 32px;
+  background-color: #0d0d0d;
+  overflow-y: auto;
+}
+
+/* Logo */
+.cat-page__logo {
+  font-family: "Single Day", cursive, system-ui;
+  font-size: 1.75rem;
+  color: #65d000;
+  margin: 0 0 28px;
+  line-height: 1;
+}
+
+/* Heading */
+.cat-page__heading {
+  font-size: 2.125rem;
+  font-weight: 700;
+  color: #ffffff;
+  line-height: 1.2;
+  margin: 0 0 28px;
+}
+
+/* ---------- Selected chips ---------- */
+.cat-page__chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 16px;
+  min-height: 36px;
+}
+
+.cat-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 10px 5px 12px;
+  background-color: #1a3a0a;
+  border: 1px solid #65d000;
+  border-radius: 20px;
+  color: #e5e7eb;
+  font-size: 0.8125rem;
+  line-height: 1;
+}
+
+.cat-chip__remove {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  background: none;
+  border: none;
+  color: #e5e7eb;
+  font-size: 1rem;
+  line-height: 1;
+  cursor: pointer;
+  padding: 0;
+  border-radius: 50%;
+  transition: color 0.15s ease, background-color 0.15s ease;
+}
+
+.cat-chip__remove:hover {
+  color: #ef4444;
+  background-color: rgba(239, 68, 68, 0.15);
+}
+
+/* ---------- Validation messages ---------- */
+.cat-page__validation {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: #ef4444;
+  font-size: 0.8125rem;
+  margin: 0;
+}
+
+.cat-page__validation-icon {
+  font-size: 0.875rem;
+}
+
+.cat-page__hint {
+  color: #6b7280;
+  font-size: 0.8125rem;
+  margin: 0;
+}
+
+/* --------------------------------------------------------------------------
+   Right panel
+   -------------------------------------------------------------------------- */
+.cat-page__right {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 32px 28px 24px;
+  overflow-y: auto;
+  background-color: #0d0d0d;
+}
+
+/* ---------- Category grid — 3 columns ---------- */
+.cat-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+  flex: 1;
+}
+
+/* --------------------------------------------------------------------------
+   CategoryCard component
+   -------------------------------------------------------------------------- */
+.cat-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  border-radius: 12px;
+  overflow: hidden;
+  cursor: pointer;
+  border: 3px solid transparent;
+  transition:
+    transform 0.18s ease,
+    border-color 0.18s ease,
+    box-shadow 0.18s ease;
+  outline: none;
+  user-select: none;
+  /* min-height keeps all cards uniform regardless of image aspect ratio */
+  min-height: 140px;
+}
+
+.cat-card:hover {
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+}
+
+.cat-card:active {
+  transform: scale(0.97);
+}
+
+/* Focus ring for keyboard navigation */
+.cat-card:focus-visible {
+  box-shadow: 0 0 0 3px #65d000;
+}
+
+/* Selected state */
+.cat-card--selected {
+  border-color: #65d000;
+  box-shadow: 0 0 0 1px #65d000, 0 6px 20px rgba(101, 208, 0, 0.2);
+}
+
+/* Checkmark badge (top-right corner) */
+.cat-card__check {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 22px;
+  height: 22px;
+  background-color: #65d000;
+  color: #0a0a0a;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  font-weight: 700;
+  z-index: 2;
+  /* Animate in when selected */
+  animation: check-pop 0.18s ease forwards;
+}
+
+@keyframes check-pop {
+  from { transform: scale(0); opacity: 0; }
+  to   { transform: scale(1); opacity: 1; }
+}
+
+/* Label — sits above the image */
+.cat-card__label {
+  position: relative;
+  z-index: 1;
+  padding: 10px 12px 6px;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: #ffffff;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
+  line-height: 1;
+}
+
+/* Image wrapper — fills remaining space */
+.cat-card__img-wrap {
+  flex: 1;
+  overflow: hidden;
+  border-radius: 0 0 10px 10px;
+  margin: 0 8px 8px;
+}
+
+.cat-card__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  border-radius: 8px;
+  transition: transform 0.25s ease;
+}
+
+.cat-card:hover .cat-card__img {
+  transform: scale(1.05);
+}
+
+/* --------------------------------------------------------------------------
+   Footer — Continue button
+   -------------------------------------------------------------------------- */
+.cat-page__footer {
+  display: flex;
+  justify-content: flex-end;
+  padding-top: 16px;
+}
+
+.cat-page__continue {
+  padding: 12px 28px;
+  background-color: #65d000;
+  border: none;
+  border-radius: 24px;
+  color: #0a0a0a;
+  font-size: 0.9375rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition:
+    background-color 0.18s ease,
+    box-shadow 0.18s ease,
+    transform 0.1s ease;
+}
+
+.cat-page__continue:hover:not(:disabled) {
+  background-color: #74e600;
+  box-shadow: 0 4px 18px rgba(101, 208, 0, 0.35);
+}
+
+.cat-page__continue:active:not(:disabled) {
+  transform: scale(0.97);
+}
+
+.cat-page__continue--disabled {
+  background-color: #2a2a2a;
+  color: #555;
+  cursor: not-allowed;
+}
+
+/* ==========================================================================
+   Responsive
+   ========================================================================== */
+
+/* Tablet — reduce left panel, keep 3-col grid */
+@media (max-width: 900px) {
+  .cat-page__left {
+    flex: 0 0 240px;
+    padding: 32px 20px;
+  }
+
+  .cat-page__heading {
+    font-size: 1.625rem;
+  }
+
+  .cat-grid {
+    gap: 10px;
+  }
+}
+
+/* Mobile — stack vertically, 2-col grid */
+@media (max-width: 600px) {
+  html, body, #root {
+    height: auto;
+    overflow: auto;
+  }
+
+  .cat-page {
+    flex-direction: column;
+    height: auto;
+    min-height: 100dvh;
+    overflow: visible;
+  }
+
+  .cat-page__left {
+    flex: none;
+    width: 100%;
+    padding: 24px 20px 16px;
+    overflow: visible;
+  }
+
+  .cat-page__right {
+    flex: none;
+    overflow: visible;
+    padding: 16px 20px 32px;
+  }
+
+  .cat-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .cat-card {
+    min-height: 120px;
+  }
+}

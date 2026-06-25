@@ -1,0 +1,311 @@
+/* ==========================================================================
+   Register.css
+   Scoped to the Registration page only.
+   Dark split-screen layout matching the Figma.
+   ========================================================================== */
+
+@import url("https://fonts.googleapis.com/css2?family=Single+Day&display=swap");
+
+/* --------------------------------------------------------------------------
+   Page shell
+   Fills the full viewport height without growing beyond it.
+   overflow:hidden on the shell prevents any layout bleed.
+   -------------------------------------------------------------------------- */
+.register-page {
+  display: flex;
+  height: 100%;           /* fills #root which is locked to 100vh */
+  background-color: #111113;
+  overflow: hidden;
+}
+
+/* --------------------------------------------------------------------------
+   Left panel — illustration
+   flex: 0 0 48% pins it to 48% of the row width.
+   overflow:hidden clips the image to the panel boundary.
+   -------------------------------------------------------------------------- */
+.register-page__left {
+  position: relative;
+  flex: 0 0 48%;
+  overflow: hidden;       /* ensures img never bleeds outside the panel */
+}
+
+/* The illustration fills the entire left panel.
+   object-fit:cover prevents any distortion or whitespace. */
+.register-page__illustration {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center center;
+  display: block;
+}
+
+/* Tagline overlays the bottom-left of the illustration */
+.register-page__tagline {
+  position: absolute;
+  bottom: 40px;
+  left: 32px;
+  right: 32px;
+  font-size: 1.875rem;   /* ~30px — matches Figma proportion */
+  font-weight: 700;
+  color: #ffffff;
+  line-height: 1.25;
+  margin: 0;
+  text-shadow: 0 2px 16px rgba(0, 0, 0, 0.7);
+}
+
+/* --------------------------------------------------------------------------
+   Right panel — form
+   Takes the remaining width.
+   overflow-y:auto means ONLY the right panel scrolls if content is too tall
+   (happens when errors appear). The page itself never scrolls.
+   -------------------------------------------------------------------------- */
+.register-page__right {
+  flex: 1;
+  display: flex;
+  align-items: center;      /* vertical center */
+  justify-content: center;  /* horizontal center */
+  padding: 32px 24px;
+  background-color: #111113;
+  overflow-y: auto;         /* internal scroll only — not the page */
+}
+
+/* Content box — max-width keeps the form tight like the Figma */
+.register-page__content {
+  width: 100%;
+  max-width: 310px;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;   /* children stretch to full content width */
+  gap: 0;
+}
+
+/* --------------------------------------------------------------------------
+   Heading
+   -------------------------------------------------------------------------- */
+.register-page__title {
+  font-family: "Single Day", cursive;
+  font-weight: 400;
+  font-size: 56px;        /* scaled down from 67px to fit in viewport */
+  line-height: 1.2;
+  color: #65d000;
+  margin: 0;
+  text-align: center;
+}
+
+.register-page__subtitle {
+  font-size: 0.8125rem;
+  color: #9ca3af;
+  margin: 4px 0 20px;
+  text-align: center;
+}
+
+/* --------------------------------------------------------------------------
+   Form
+   -------------------------------------------------------------------------- */
+.reg-form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* --------------------------------------------------------------------------
+   FormField component
+   -------------------------------------------------------------------------- */
+.form-field {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Screen-reader-only label — placeholder is the visible label per Figma */
+.form-field__label {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.form-field__input {
+  width: 100%;
+  padding: 12px 14px;
+  background-color: #1c1c1e;
+  border: 1px solid #2a2a2d;
+  border-radius: 5px;
+  color: #e5e7eb;
+  font-size: 0.875rem;
+  outline: none;
+  transition: border-color 0.18s ease, box-shadow 0.18s ease;
+}
+
+.form-field__input::placeholder {
+  color: #52525b;
+}
+
+.form-field__input:focus {
+  border-color: #65d000;
+  box-shadow: 0 0 0 2px rgba(101, 208, 0, 0.12);
+}
+
+.form-field__input--error {
+  border-color: #ef4444;
+}
+
+.form-field__input--error:focus {
+  border-color: #ef4444;
+  box-shadow: 0 0 0 2px rgba(239, 68, 68, 0.12);
+}
+
+.form-field__error {
+  font-size: 0.7rem;
+  color: #ef4444;
+  margin-top: 3px;
+  padding-left: 2px;
+  min-height: 1em;        /* reserve space so inputs don't jump on error */
+}
+
+/* --------------------------------------------------------------------------
+   Checkbox
+   -------------------------------------------------------------------------- */
+.reg-form__checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #9ca3af;
+  font-size: 0.8125rem;
+  cursor: pointer;
+  padding: 2px 0;
+}
+
+.reg-form__checkbox {
+  width: 15px;
+  height: 15px;
+  flex-shrink: 0;
+  accent-color: #65d000;
+  cursor: pointer;
+}
+
+/* --------------------------------------------------------------------------
+   Submit button
+   -------------------------------------------------------------------------- */
+.reg-form__submit {
+  width: 100%;
+  padding: 13px;
+  background-color: #65d000;
+  border: none;
+  border-radius: 6px;
+  color: #0a0a0a;
+  font-size: 0.875rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  cursor: pointer;
+  transition:
+    background-color 0.18s ease,
+    box-shadow 0.18s ease,
+    transform 0.1s ease;
+}
+
+.reg-form__submit:hover {
+  background-color: #74e600;
+  box-shadow: 0 4px 18px rgba(101, 208, 0, 0.3);
+}
+
+.reg-form__submit:active {
+  transform: scale(0.985);
+  background-color: #55b000;
+}
+
+/* --------------------------------------------------------------------------
+   Legal text
+   -------------------------------------------------------------------------- */
+.reg-form__legal {
+  font-size: 0.7rem;
+  color: #52525b;
+  line-height: 1.55;
+  margin: 0;
+}
+
+.reg-form__link {
+  color: #65d000;
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+
+.reg-form__link:hover {
+  color: #78e800;
+  text-decoration: underline;
+}
+
+/* ==========================================================================
+   Responsive
+   ========================================================================== */
+
+/* Tablet — maintain split if screen is wide enough */
+@media (max-width: 900px) and (min-width: 601px) {
+  .register-page__left {
+    flex: 0 0 42%;
+  }
+
+  .register-page__title {
+    font-size: 44px;
+  }
+
+  .register-page__tagline {
+    font-size: 1.5rem;
+    bottom: 28px;
+    left: 24px;
+    right: 24px;
+  }
+}
+
+/* Mobile — stack vertically, allow right panel to scroll if needed */
+@media (max-width: 600px) {
+  html,
+  body,
+  #root {
+    /* Re-enable scrolling on mobile so the form is fully accessible */
+    height: auto;
+    overflow: auto;
+  }
+
+  .register-page {
+    flex-direction: column;
+    height: auto;
+    min-height: 100dvh;
+    overflow: visible;
+  }
+
+  .register-page__left {
+    flex: none;
+    height: 220px;
+    width: 100%;
+    overflow: hidden;
+  }
+
+  .register-page__right {
+    flex: none;
+    overflow: visible;
+    padding: 32px 20px 48px;
+    align-items: flex-start;
+    justify-content: flex-start;
+  }
+
+  .register-page__content {
+    max-width: 100%;
+  }
+
+  .register-page__tagline {
+    font-size: 1.375rem;
+    bottom: 20px;
+    left: 20px;
+    right: 20px;
+  }
+
+  .register-page__title {
+    font-size: 40px;
+  }
+}
