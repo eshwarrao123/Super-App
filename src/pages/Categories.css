@@ -1,8 +1,3 @@
-/* ==========================================================================
-   Categories.css
-   Refined to match Figma category selection screen.
-   ========================================================================== */
-
 /* --------------------------------------------------------------------------
    Page shell — exact viewport fit, no page scroll on desktop
    -------------------------------------------------------------------------- */
@@ -130,16 +125,19 @@
   grid-template-rows: repeat(3, 1fr);
   /* Exactly 3 equal rows */
   gap: clamp(10px, 2.5vh, 20px);
-  
+
   width: 100%;
-  max-width: 850px; /* Allows the grid to be much wider, matching Figma */
-  
+  max-width: 850px;
+  /* Allows the grid to be much wider, matching Figma */
+
   flex: 1;
   /* Takes available space after the footer */
   min-height: 0;
-  max-height: 900px; /* Allows the grid to be much taller, maintaining vertical card proportions */
-  
-  margin: auto; /* Vertically and horizontally centers the grid */
+  max-height: 900px;
+  /* Allows the grid to be much taller, maintaining vertical card proportions */
+
+  margin: auto;
+  /* Vertically and horizontally centers the grid */
 }
 
 /* --------------------------------------------------------------------------
@@ -186,7 +184,8 @@
 }
 
 .cat-card__img-wrap {
-  position: relative; /* Added to contain the absolute image */
+  position: relative;
+  /* Added to contain the absolute image */
   flex: 1;
   /* Takes all remaining vertical space inside the card */
   min-height: 0;
@@ -197,7 +196,8 @@
 }
 
 .cat-card__img {
-  position: absolute; /* CRUCIAL: Removes intrinsic image size from layout calculation */
+  position: absolute;
+  /* CRUCIAL: Removes intrinsic image size from layout calculation */
   top: 0;
   left: 0;
   width: 100%;
@@ -216,7 +216,8 @@
   justify-content: flex-end;
   padding-top: clamp(16px, 3vh, 24px);
   flex-shrink: 0;
-  margin-top: auto; /* Guarantees the button is forced to the bottom */
+  margin-top: auto;
+  /* Guarantees the button is forced to the bottom */
   /* Button container must never shrink, always visible */
 }
 

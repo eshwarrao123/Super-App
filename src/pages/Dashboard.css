@@ -1,30 +1,66 @@
-/* ==========================================================================
-   Dashboard.css  —  Matches Figma Page 3
-   ========================================================================== */
-
 /* --------------------------------------------------------------------------
    Page shell
    -------------------------------------------------------------------------- */
 .dashboard {
   display: flex;
-  gap: 32px;
-  align-items: stretch; /* Both columns same height */
-  min-height: 100vh;
-  min-height: 100dvh;
-  padding: 48px 44px;
+  gap: 20px;
+  align-items: stretch;
+  height: 100vh;
+  height: 100dvh;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 40px 44px 80px;
   background-color: #0d0d0d;
   box-sizing: border-box;
+  position: relative;
 }
 
+/* Browse button — pinned to bottom-right corner of the dashboard */
+.dashboard__browse-btn {
+  position: absolute;
+  bottom: 100px;
+  right: 44px;
+  background: #2ecc40;
+  color: #ffffff;
+  border: none;
+  border-radius: 30px;
+  padding: 10px 28px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  letter-spacing: 0.3px;
+  box-shadow: 0 4px 16px rgba(46, 204, 64, 0.35);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
+}
+
+.dashboard__browse-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(46, 204, 64, 0.45);
+}
+
+.dashboard__browse-btn:active {
+  transform: translateY(0);
+  opacity: 0.85;
+}
+
+
 /* --------------------------------------------------------------------------
-   Column layout — Figma: left ≈55%, right ≈40%
+   Column layout — 3 columns matching Figma
    -------------------------------------------------------------------------- */
 .dashboard__left {
   display: flex;
   flex-direction: column;
   gap: 20px;
-  flex: 0 0 520px;     /* Fixed left column, matches Figma */
+  flex: 0 0 520px;
   max-width: 520px;
+  flex-shrink: 0;
+}
+
+.dashboard__middle {
+  flex: 0 0 300px;
+  max-width: 300px;
+  display: flex;
+  flex-direction: column;
 }
 
 .dashboard__right {
@@ -39,12 +75,13 @@
    ========================================================================== */
 .profile-card {
   display: flex;
-  gap: 28px;
+  gap: 20px;
   align-items: center;
   background: linear-gradient(140deg, #5533cc 0%, #7b3fe4 55%, #4a28a8 100%);
   border-radius: 24px;
-  padding: 24px 28px 24px 20px;
+  padding: 20px 24px 20px 16px;
   box-shadow: 0 8px 32px rgba(78, 43, 204, 0.35);
+  flex-shrink: 0;
 }
 
 /* ---------- Avatar ---------- */
@@ -53,22 +90,22 @@
 }
 
 .profile-card__avatar-wrap {
-  width: 110px;
-  height: 155px;
-  border-radius: 55px;
+  width: 70px;
+  height: 160px;
+  border-radius: 35px;
   overflow: hidden;
   background: linear-gradient(180deg, #5a3ac9 0%, #2a1262 100%);
-  border: 3px solid rgba(255, 255, 255, 0.2);
-  display: flex;
-  align-items: flex-end;
-  justify-content: center;
+  border: 3px solid #ffffff;
+  display: block;
+  position: relative;
 }
 
 .profile-card__avatar {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: top center;
+  object-position: center top;
+  display: block;
 }
 
 /* ---------- Info ---------- */
@@ -80,7 +117,7 @@
 }
 
 .profile-card__name {
-  font-size: 1.15rem;
+  font-size: 1.05rem;
   font-weight: 600;
   color: rgba(255, 255, 255, 0.92);
   margin: 0;
@@ -88,37 +125,39 @@
 }
 
 .profile-card__email {
-  font-size: 1rem;
+  font-size: 0.9rem;
   color: rgba(255, 255, 255, 0.8);
   margin: 0 0 4px;
   line-height: 1.4;
 }
 
 .profile-card__username {
-  font-size: 2rem;
+  font-size: 1.6rem;
   font-weight: 800;
   color: #ffffff;
-  margin: 0 0 16px;
+  margin: 0 0 12px;
   letter-spacing: 0.5px;
   line-height: 1.1;
 }
 
 /* ---------- Category chips ---------- */
 .profile-card__chips {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  width: 100%;
 }
 
 .profile-card__chip {
-  padding: 9px 22px;
+  padding: 5px 8px;
   background: rgba(255, 255, 255, 0.14);
-  border: 1.5px solid rgba(255, 255, 255, 0.25);
-  border-radius: 30px;
+  border: none;
+  border-radius: 20px;
   color: #ffffff;
-  font-size: 0.9rem;
+  font-size: 0.8rem;
   font-weight: 500;
   letter-spacing: 0.2px;
+  text-align: center;
   backdrop-filter: blur(6px);
   -webkit-backdrop-filter: blur(6px);
 }
@@ -132,6 +171,7 @@
   background-color: #161625;
   border: 1px solid rgba(255, 255, 255, 0.07);
   box-shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
+  flex-shrink: 0;
 }
 
 /* ---------- Pink date/time bar ---------- */
@@ -139,13 +179,13 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 18px 30px;
+  padding: 14px 24px;
   background: linear-gradient(90deg, #e91e8c 0%, #ff4081 100%);
 }
 
 .weather-widget__date,
 .weather-widget__time {
-  font-size: 1.75rem;
+  font-size: 1.4rem;
   font-weight: 700;
   color: #ffffff;
   letter-spacing: 0.5px;
@@ -155,8 +195,8 @@
 .weather-widget__body {
   display: flex;
   align-items: center;
-  padding: 22px 16px;
-  min-height: 100px;
+  padding: 16px 12px;
+  min-height: 90px;
 }
 
 .weather-widget__status {
@@ -187,7 +227,7 @@
 /* Vertical dividers */
 .weather-widget__divider {
   width: 1px;
-  height: 64px;
+  height: 48px;
   background: rgba(255, 255, 255, 0.12);
   flex-shrink: 0;
   margin: 0 4px;
@@ -195,15 +235,15 @@
 
 /* OWM icon image */
 .weather-widget__icon-img {
-  width: 64px;
-  height: 64px;
+  width: 50px;
+  height: 50px;
   object-fit: contain;
   filter: drop-shadow(0 0 8px rgba(108, 159, 255, 0.5));
 }
 
 /* Fallback emoji icon */
 .weather-widget__icon {
-  font-size: 3rem;
+  font-size: 2.5rem;
   line-height: 1;
 }
 
@@ -217,7 +257,7 @@
 
 /* Temperature */
 .weather-widget__temp {
-  font-size: 2.75rem;
+  font-size: 2.25rem;
   font-weight: 700;
   color: #ffffff;
   line-height: 1;
@@ -261,16 +301,16 @@
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  height: 100%;           /* Fills the entire right column height */
+  height: 80%;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-  outline: none;          /* Remove focus ring — keyboard nav handled internally */
+  outline: none;
 }
 
 /* ── Carousel viewport — clips the sliding panels ── */
 .news-widget__viewport {
   flex: 1;
   position: relative;
-  overflow: hidden;        /* The actual clip boundary */
+  overflow: hidden; /* The actual clip boundary */
   min-height: 0;
 }
 
@@ -307,23 +347,51 @@
 }
 
 @keyframes slide-in-right {
-  from { transform: translateX(100%); opacity: 0.6; }
-  to   { transform: translateX(0);    opacity: 1;   }
+  from {
+    transform: translateX(100%);
+    opacity: 0.6;
+  }
+
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
 }
 
 @keyframes slide-out-left {
-  from { transform: translateX(0);     opacity: 1;   }
-  to   { transform: translateX(-100%); opacity: 0.6; }
+  from {
+    transform: translateX(0);
+    opacity: 1;
+  }
+
+  to {
+    transform: translateX(-100%);
+    opacity: 0.6;
+  }
 }
 
 @keyframes slide-in-left {
-  from { transform: translateX(-100%); opacity: 0.6; }
-  to   { transform: translateX(0);     opacity: 1;   }
+  from {
+    transform: translateX(-100%);
+    opacity: 0.6;
+  }
+
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
 }
 
 @keyframes slide-out-right {
-  from { transform: translateX(0);    opacity: 1;   }
-  to   { transform: translateX(100%); opacity: 0.6; }
+  from {
+    transform: translateX(0);
+    opacity: 1;
+  }
+
+  to {
+    transform: translateX(100%);
+    opacity: 0.6;
+  }
 }
 
 .news-widget--loading,
@@ -343,7 +411,7 @@
 /* ---------- Image — taller to match Figma ---------- */
 .news-widget__img-wrap {
   width: 100%;
-  height: 260px;        /* Taller image like Figma */
+  height: 45%;
   overflow: hidden;
   flex-shrink: 0;
 }
@@ -352,6 +420,7 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: center; /* Shows the important middle portion */
   display: block;
 }
 
@@ -386,13 +455,16 @@
   line-height: 1.65;
   margin: 0;
   flex: 1;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  text-align: justify;
 
   /* Clamp to ~6 lines */
-  display: -webkit-box;
+  /* display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 6;
   overflow: hidden;
-  text-align: justify;
+  text-align: justify; */
 }
 
 /* ---------- Progress dots (outside viewport clip) ---------- */
@@ -401,7 +473,8 @@
   gap: 7px;
   padding: 12px 22px 14px;
   flex-shrink: 0;
-  background: #ffffff;    /* Stays on the white card surface */
+  background: #ffffff;
+  /* Stays on the white card surface */
 }
 
 .news-widget__dot {
@@ -421,38 +494,281 @@
 }
 
 /* ==========================================================================
+   NOTES WIDGET
+   ========================================================================== */
+.notes-widget {
+  background: #f5c842;
+  border-radius: 20px;
+  padding: 30px 24px 20px;
+  display: flex;
+  flex-direction: column;
+  /* Exact match for profile + weather + gap */
+  height: 400px;
+  flex: none;
+  box-shadow: 0 6px 24px rgba(245, 200, 66, 0.25);
+}
+
+.notes-widget__title {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin: 0 0 16px;
+  line-height: 1.2;
+}
+
+.notes-widget__textarea {
+  flex: 1;
+  resize: none;
+  border: none;
+  outline: none;
+  background: transparent;
+  font-family: inherit;
+  font-size: 0.975rem;
+  color: #222222;
+  line-height: 1.65;
+  min-height: 0;
+  overflow-y: auto;
+  /* Internal scroll — never grows the card */
+  scrollbar-width: thin;
+  scrollbar-color: rgba(0, 0, 0, 0.15) transparent;
+}
+
+.notes-widget__textarea::placeholder {
+  color: rgba(30, 20, 0, 0.4);
+}
+
+/* ==========================================================================
+   TIMER WIDGET
+   ========================================================================== */
+.timer-widget {
+  background: #12122a;
+  border-radius: 20px;
+  padding: 20px;
+  position: relative;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.5);
+  flex-shrink: 0;
+}
+
+/* Done banner */
+.timer-widget__done {
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #f0717a;
+  color: #ffffff;
+  font-size: 0.85rem;
+  font-weight: 600;
+  padding: 6px 20px;
+  border-radius: 20px;
+  white-space: nowrap;
+  z-index: 10;
+  animation: fade-in-down 0.3s ease both;
+}
+
+@keyframes fade-in-down {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+/* Body: ring left + controls right */
+.timer-widget__body {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+/* ── Ring ── */
+.timer-widget__ring-wrap {
+  position: relative;
+  flex-shrink: 0;
+  width: 170px;
+  height: 170px;
+}
+
+.timer-ring {
+  width: 100%;
+  height: 100%;
+}
+
+.timer-widget__digital {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: 0.5px;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ── Controls ── */
+.timer-widget__controls {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* Column headers row */
+.timer__col-headers {
+  display: flex;
+  justify-content: space-around;
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.45);
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+/* Three spin columns */
+.timer__cols {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  gap: 4px;
+}
+
+.timer__col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.timer__value {
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: #ffffff;
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+  min-width: 2.5ch;
+  text-align: center;
+}
+
+.timer__colon {
+  font-size: 2rem;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.5);
+  line-height: 1;
+  margin-bottom: 20px;
+  flex-shrink: 0;
+}
+
+/* Spin buttons */
+.timer__spin {
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.4);
+  font-size: 0.75rem;
+  cursor: pointer;
+  padding: 2px 8px;
+  line-height: 1;
+  transition: color 0.15s ease;
+}
+
+.timer__spin:hover:not(:disabled) {
+  color: #ffffff;
+}
+
+.timer__spin:disabled {
+  opacity: 0.2;
+  cursor: not-allowed;
+}
+
+/* Action buttons */
+.timer__actions {
+  display: flex;
+  gap: 10px;
+}
+
+.timer__btn {
+  flex: 1;
+  padding: 11px 0;
+  border: none;
+  border-radius: 30px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.2s ease, transform 0.1s ease;
+}
+
+.timer__btn:hover {
+  opacity: 0.88;
+}
+
+.timer__btn:active {
+  transform: scale(0.97);
+}
+
+.timer__btn--start {
+  background: linear-gradient(90deg, #f0717a 0%, #e84393 100%);
+  color: #ffffff;
+}
+
+.timer__btn--pause {
+  background: rgba(255, 255, 255, 0.12);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.timer__btn--reset {
+  background: rgba(255, 255, 255, 0.08);
+  color: rgba(255, 255, 255, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+/* ==========================================================================
    Responsive
    ========================================================================== */
-@media (max-width: 1024px) {
+@media (max-width: 1280px) {
   .dashboard__left {
     flex: 0 0 420px;
     max-width: 420px;
   }
+
+  .dashboard__middle {
+    flex: 0 0 270px;
+    max-width: 270px;
+  }
 }
 
-@media (max-width: 900px) {
+@media (max-width: 960px) {
   .dashboard {
     flex-direction: column;
     align-items: stretch;
-    padding: 24px;
+    padding: 24px 24px 80px;
     gap: 20px;
+    height: auto; /* Let the body scroll natively on mobile */
+    min-height: 100vh;
+    overflow-y: visible;
   }
 
-  .dashboard__left {
+  .dashboard__left,
+  .dashboard__middle,
+  .dashboard__right {
     flex: none;
     width: 100%;
     max-width: 100%;
   }
 
   .dashboard__right {
-    width: 100%;
     min-height: 480px;
   }
 
-  .news-widget {
-    height: auto;
+  .notes-widget {
+    height: 280px; /* fixed height on tablet too */
   }
 
+  .news-widget,
   .news-widget--loading,
   .news-widget--error,
   .news-widget--empty {
@@ -493,5 +809,36 @@
 
   .news-widget__img-wrap {
     height: 200px;
+  }
+
+  .weather-widget__body {
+    flex-direction: column;
+    gap: 16px;
+    padding: 20px;
+  }
+
+  .weather-widget__divider {
+    width: 100%;
+    height: 1px;
+  }
+
+  .timer-widget__body {
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+  }
+
+  .timer-widget__controls {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .timer-widget__controls-col {
+    width: 100%;
+  }
+
+  .timer-widget__ring-wrap {
+    width: 150px;
+    height: 150px;
   }
 }

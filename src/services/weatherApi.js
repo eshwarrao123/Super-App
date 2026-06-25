@@ -1,1 +1,0 @@
-export { fetchCurrentWeather } from "./apiServices";

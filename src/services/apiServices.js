@@ -5,8 +5,6 @@ import axios from "axios";
  *
  * Central API service layer.
  * All base URLs and API keys are read from environment variables.
- * Individual service files (weatherApi.js, newsApi.js, movieApi.js) re-export
- * from here, keeping the architecture modular without duplication.
  */
 
 // ---------- Axios clients ----------
